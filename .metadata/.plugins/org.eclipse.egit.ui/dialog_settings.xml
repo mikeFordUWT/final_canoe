@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="0" key="org.eclipse.egit.ui.internal.clone.GitSelectWizardPageWizardSel"/>
+	<item value="/Users/Mike/git/Canoe2/.git" key="GitSelectRepositoryPage.lastRepository"/>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/mikeFordUWT/canoe.git"/>
+		<item value="https://github.com/mikeFordUWT/Canoe2.git"/>
+	</list>
+	<section name="GitImportWizard">
+	</section>
+</section>
