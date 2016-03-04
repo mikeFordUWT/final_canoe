@@ -8,12 +8,14 @@ public class Node {
 	private LinkedList<Edge> myEdges; 
 	private Integer myElement;
 	private int totalEdges = 0;
+	
+	private int minDistance;
 
 
 	public Node(int element){
 		myElement = element;
 		myEdges = new LinkedList<Edge>();
-
+		minDistance = 99999;
 	}
 
 	public void addEdge(Edge edge){
@@ -40,4 +42,16 @@ public class Node {
 	public Integer edgeAmount(){
 		return totalEdges;
 	}
+	
+	public void setMinDistance(int newMin){
+		minDistance = newMin;
+	}
+	
+	public int getMinDistance(){
+		return minDistance;
+	}
+	
+	
+	
+	
 }
