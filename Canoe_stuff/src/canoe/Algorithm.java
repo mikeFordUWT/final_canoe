@@ -199,16 +199,16 @@ public class Algorithm {
 		return toReturn;
 	}
 	
-	public ArrayList<Node> divideAndConquer(int[][] inputMatrix){
-		Graph g = this.createStationGraph(inputMatrix);
-		ArrayList<Node> toReturn = g.BFS();
-		
-		
-		
-		return toReturn;
-		
-		
-	}
+//	public ArrayList<Node> divideAndConquer(int[][] inputMatrix){
+//		Graph g = this.createStationGraph(inputMatrix);
+////		ArrayList<Node> toReturn = g.BFS();
+//		
+//		
+//		
+////		return toReturn;
+//		
+//		
+//	}
 	
 	
 }
