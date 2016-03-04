@@ -1,4 +1,5 @@
 package canoe;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Graph {
@@ -21,6 +22,16 @@ public class Graph {
 	public int size(){
 		return myNodes.size();
 	}
+	
+	public Node getFirst(){
+		return myNodes.getFirst();
+	}
+	
+	
+//	public ArrayList<Node> BFS(){
+//		
+//	}
+	
 	
 	public void printGraph(){
 		LinkedList<Node> nodes = getNodes();
