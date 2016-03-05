@@ -154,61 +154,114 @@ public class Algorithm {
 				}
 			}
 		}
-		 graph.printGraph();
+		//graph.printGraph();
 		return graph;
 	}
 
 	public void bForceCanoes(int[][] inputMatrix) {
 
 		Graph graph = createStationGraph(inputMatrix);
-		// generate the subsets
+		// generate a matrix of the powerset
 		int stations = inputMatrix.length;
-		int[] A = new int[stations + 1];
-		boolean[] B = new boolean[A.length];
-		for (int i = 1; i < stations + 1; i++) {
-			A[i] = i;
+		int[] A = new int[stations-2];
+		for (int i = 1; i < stations-1; i++) {
+			A[i-1] = i+1;
 		}
-		int[][] subsets = getSubsets(A, stations, 0, 0, B);
+		System.out.println();
+		int[][] subsets = getSubsets(A);
+		int[] curSubset = new int[A.length+2];
+		int curCost = 0;
+		int[] minSubset = new int[A.length+2];
+		int minCost = INF;
+		
+		for(int i = 0; i < subsets.length; i++){
+			for(int j = 0; j < curSubset.length; j++){
+				if (j == 0){
+					curSubset[j] = 1;
+					continue;
+				}
+				else if (j == curSubset.length-1){
+					curSubset[j] = curSubset.length;
+					continue;
+				}
+				else {
+					curSubset[j] = subsets[i][j-1];
+				}
+			}
+			
+			//check the cost of that subset, make it the minsubset if neccessary
+			curCost = 0;
+			for(int r = 0; r < curSubset.length; r++){
+				if(curSubset[r] == 0){
+					continue;
+				}
+				if(r == 0){
+					curCost += inputMatrix[0][r];
+					continue;
+				}
+				curCost += inputMatrix[curSubset[r-1]][r];
+			}
+			System.out.print("SUBSET: [ "  );
+			for(int q = 0; q<curSubset.length; q++){
+				System.out.print(curSubset[q]+ " ");
+			}
+			System.out.println("]");
+			System.out.println("COST "+ curCost);
+		}
+		
 	}
 
 	/**
-	 * A function to return the subsets of a given array
-	 * Guidance from: http://algorithms.tutorialhorizon.com/print-all-combinations-of-subset-of-size-k-from-given-array/
+	 * A function to return the powerset of a given array
 	 */
-	private int[][] getSubsets(int[] A, int k,  int start, int curLen, boolean[] used){
-		int[][] toReturn = new int[A.length][A.length];
-		for(int j=0; j< A.length; j++){
-			if (curLen == k){
-				for(int i =0; i < A.length; i++){
-					if (used[i] == true){
-						toReturn[j][i] = A[i];
-						System.out.print(A[i]);
-					}
-				}
-			}
-			if (start == A.length){
-				break;
-			}
-			
-			used[start] = true;
-			getSubsets(A, k, start +1, curLen +1, used);
-			
-			used[start] = false;
-			getSubsets(A, k, start +1, curLen, used);
+	private int[][] getSubsets(int[] A){
+		int[][] toReturn = new int[(int) Math.pow(2, A.length)][A.length];
+		
+		for(int i = 0; i < Math.pow(2,  A.length); i++){
+			int j = 0;
+			StringBuilder binary = new StringBuilder(Integer.toBinaryString(i));
+	        for(int k = binary.length(); k < A.length; k++) {
+	            binary.insert( 0, '0' );
+	        }
+	        for(int r = 0; r<binary.length(); r++){
+	        	if(binary.charAt(r) == '1'){
+	        		toReturn[i][j] = A[r];
+	        	}
+		        j++;
+	        }
 		}
+		//printRectangularMatrix(toReturn, A.length);
 		return toReturn;
 	}
 	
-//	public ArrayList<Node> divideAndConquer(int[][] inputMatrix){
-//		Graph g = this.createStationGraph(inputMatrix);
-////		ArrayList<Node> toReturn = g.BFS();
-//		
-//		
-//		
-////		return toReturn;
-//		
-//		
-//	}
+	private static void printRectangularMatrix(int[][] inputMatrix, int size){
+		int rows = inputMatrix.length;
+		int cols = size;
+		
+		for(int i = 0; i < rows; i ++){
+			System.out.print("[");
+			for(int j = 0; j < cols; j++){
+				System.out.print(String.format("%4d", inputMatrix[i][j]));
+				if(j < inputMatrix[i].length - 1) System.out.print(", ");
+			}
+			System.out.println("]");
+		}
+		System.out.println();
+	}
 	
+//	private static void printMatrix(int[][] inputMatrix){
+//		int width = inputMatrix.length;
+//		System.out.println(inputMatrix.length + "x" + inputMatrix.length);
+//		for(int i =0; i<width; i++){
+//			System.out.print("[");
+//			for(int j = 0; j < width; j++){
+//				System.out.print(String.format("%7d", inputMatrix[i][j]));
+//				if(j < inputMatrix[i].length - 1) System.out.print(", ");
+//			}
+//			System.out.println("]");
+//		}
+//		System.out.println();
+//	}
+
 	
 }

@@ -3,7 +3,7 @@ package canoe;
 import java.util.ArrayList;
 
 public class runner {
-	private static int SIZE = 10;
+	private static int SIZE = 4;
 
 	public static void main(String[] args) {
 		Algorithm alg = new Algorithm(SIZE);
@@ -26,7 +26,7 @@ public class runner {
 		}
 		
 		
-		alg.createStationGraph(randomM);
+		alg.bForceCanoes(randomM);
 		
 	}
 
