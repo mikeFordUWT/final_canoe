@@ -1,23 +1,29 @@
 package canoe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class runner {
-	private static int SIZE = 10;
+	private static int SIZE =4;
 
 	public static void main(String[] args) {
+		
+		int[][] mat = {{   0,     4,    11, 15},
+					   {9999,     0,     6, 12},
+					   {9999, 99999,     0,  8},
+					   {9999, 99999, 99999,  0}};
 		Algorithm alg = new Algorithm(SIZE);
 		int[][] randomM = alg.randomMatrixGenerate();
 		if(SIZE < 20){
-			printMatrix(randomM);
-			int[][] path = alg.minCost(randomM);
+			printMatrix(mat);
+			int[][] path = alg.minCost(mat);
 			printMatrix(path);
 //			printFirst(path);
 			
 			ArrayList<Integer> canoes = alg.whichCanoes(path);
 			System.out.println(canoes.toString());
 		} else {
-			int[][] path = alg.minCost(randomM);
+			int[][] path = alg.minCost(mat);
 			
 
 			
@@ -26,8 +32,14 @@ public class runner {
 		}
 		
 		
-		alg.createStationGraph(randomM);
-		
+		alg.createStationGraph(mat);
+		Graph g  = alg.createStationGraph(mat);
+		System.out.println();
+		printMatrix(mat);
+//		int[] minDist = 
+		g.Dijkstra(g.getFirst(), mat);
+		System.out.println(g.getNodes().getLast().getMinDistance());
+//		System.out.println(Arrays.toString(minDist));
 	}
 
 	

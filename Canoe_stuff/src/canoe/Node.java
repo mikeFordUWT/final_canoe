@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import javax.swing.tree.TreeNode;
 
-public class Node {
+public class Node implements Comparable<Node>{
 	private LinkedList<Edge> myEdges; 
 	private Integer myElement;
 	private int totalEdges = 0;
@@ -51,7 +51,18 @@ public class Node {
 		return minDistance;
 	}
 	
-	
+	@Override
+	public int compareTo(Node n){
+		int toReturn;
+		if(minDistance > n.getMinDistance()){
+			toReturn = 1;
+		} else if(minDistance < n.getMinDistance()) {
+			toReturn = -1;
+		} else {
+			toReturn =0;
+		}
+		return toReturn;
+	}
 	
 	
 }

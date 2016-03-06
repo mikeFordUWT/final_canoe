@@ -52,13 +52,18 @@ public class Graph {
 		return toReturn;
 	}
 
-	public int[] Dijkstra(Node source, int[][] inputMatrix){
-		int[] toReturn = new int[myNodes.size()-1];
+	public void Dijkstra(Node source, int[][] inputMatrix){
+		int[] toReturn = new int[myNodes.size()];
 		source.setMinDistance(inputMatrix[0][1]);
+		toReturn[0] = source.getMinDistance();
+//		toReturn[1] = source.getMinDistance();
 		for(int i = 1; i< myNodes.size(); i++){
 			toReturn[i] = 99999;
 		}
-		toReturn[0] = source.getMinDistance();
+		
+		PriorityQueue<Edge> edges = new PriorityQueue<Edge>();
+		edges.addAll(source.getEdges());
+		
 		PriorityQueue<Node> nodes = new PriorityQueue<Node>();
 		nodes.add(source);
 		while(!nodes.isEmpty()){
@@ -69,13 +74,15 @@ public class Graph {
 				int weight = e.getWeight();
 				int distance = current.getMinDistance() + weight;
 				if(distance < n.getMinDistance()){
+					nodes.remove(n);
 					n.setMinDistance(distance);
-					toReturn[n.getElement()-1] = n.getMinDistance();
+//					toReturn[n.getElement()-1] = n.getMinDistance();
+					nodes.add(n);
 				}
 				
 			}
 		}
-		return toReturn;
+//		return toReturn;
 	}
 
 
