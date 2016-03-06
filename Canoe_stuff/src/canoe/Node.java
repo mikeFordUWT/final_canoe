@@ -2,7 +2,6 @@ package canoe;
 
 import java.util.LinkedList;
 
-import javax.swing.tree.TreeNode;
 
 public class Node implements Comparable<Node>{
 	private LinkedList<Edge> myEdges; 
